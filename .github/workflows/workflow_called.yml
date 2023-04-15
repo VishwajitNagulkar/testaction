@@ -74,8 +74,8 @@ jobs:
         env:
           tags: ${{ github.run_number }}
         with:
-#          image-ref: ${{ github.run_number }}
-         image-ref: $tags
+         image-ref: ${{ github.run_number }}
+#          image-ref: $tags
          format: table 
          exit-code: 0
 
