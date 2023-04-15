@@ -18,7 +18,7 @@ jobs:
       aws-region: ca-central-1
       ECR_REPOSITORY: vishwajitnagulkar
       severity: 'HIGH,CRITICAL'             ###which vulnabrity should disable the workflow (local image scan)
-      registry1: 'DOCKERHUB'                ### 1. ECR, 2. DOCKERHUB, 3. DOCKERHUB,ECR
+      registry: 'DOCKERHUB'                ### 1. ECR, 2. DOCKERHUB, 3. DOCKERHUB,ECR
       IMAGE_TAG: ${{ github.run_number }}   ## image tags
     secrets:
       aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
