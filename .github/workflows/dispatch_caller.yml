@@ -1,4 +1,4 @@
-name: ifdispatchcaller
+name: ifdispatchcaller (master1)
 
 on:
   push:
@@ -11,7 +11,7 @@ on:
 
 jobs:
   call-workflow-A:
-    uses: VishwajitNagulkar/testaction/.github/workflows/workflow_called.yml@master
+    uses: VishwajitNagulkar/testaction/.github/workflows/workflow_called.yml@master1
     with:
       user: Vishwajit
       images: vishwajitnagulkar/test1
