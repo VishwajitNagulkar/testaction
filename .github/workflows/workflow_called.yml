@@ -61,8 +61,6 @@ jobs:
       - name: Build and export to Docker
         id: build-id
         uses: docker/build-push-action@v4
-        env:
-          tags: ${{ github.run_number }}
         with:
           push: false
           load: true # Export to Docker Engine rather than pushing to a registry
@@ -75,7 +73,6 @@ jobs:
           tags: ${{ github.run_number }}
         with:
          image-ref: ${{ github.run_number }}
-#          image-ref: $tags
          format: table 
          exit-code: 0
 
@@ -88,15 +85,11 @@ jobs:
         #  severity: 'HIGH,CRITICAL'
          severity: ${{ inputs.severity}}
        
-      
-      
       - name: Push docker image to DOCKERHUB
         if: ${{ inputs.registry1 == 'DOCKERHUB' }}
         env:
           IMAGE_TAG: ${{ github.run_number }}
-          images: ${{ inputs.images }}
-          
-          
+          images: ${{ inputs.images }}  
         run: |
           docker build -t $images:$IMAGE_TAG .
           docker push $images:$IMAGE_TAG
@@ -125,16 +118,13 @@ jobs:
 
       - name: Push docker image to Amazon ECR and DOCKERHUB
         if: ${{ inputs.registry1 == 'DOCKERHUB,ECR' }}
-#         id: docker-build
         env:
-          ## For ECR
+          ## For ECR env variable
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: ${{ inputs.ECR_REPOSITORY }}
           IMAGE_TAG: ${{ github.run_number }}
-          ## For DOCKERHUB
+          ## For DOCKERHUB env variable
           images: ${{ inputs.images }}
-          
-          
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
