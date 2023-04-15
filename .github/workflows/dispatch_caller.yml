@@ -11,6 +11,7 @@ on:
 
 jobs:
   call-workflow-A:
+    if: github.ref == 'refs/heads/master1'
     uses: VishwajitNagulkar/testaction/.github/workflows/workflow_called.yml@master1
     with:
       user: Vishwajit
