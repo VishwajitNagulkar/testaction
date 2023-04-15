@@ -98,16 +98,16 @@ jobs:
       #     username: ${{ secrets.username }}
       #     password: ${{ secrets.password }}
       
-      - name: Docker Push to Docker Hub
+      - name: Push docker image to DOCKERHUB
         if: ${{ inputs.registry1 == 'DOCKERHUB' }}
-        uses: docker/build-push-action@v4
-        with:
-          push: true
-          tags: ${{ steps.docker_meta.outputs.tags }}
-          labels: ${{ steps.docker_meta.outputs.labels }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-          platforms: linux/amd64,linux/arm64,linux/arm/v7
+        env:
+          IMAGE_TAG: ${{ github.run_number }}
+          images: ${{ inputs.images }}
+          
+          
+        run: |
+          docker build -t $images:$IMAGE_TAG .
+          docker push $images:$IMAGE_TAG
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
