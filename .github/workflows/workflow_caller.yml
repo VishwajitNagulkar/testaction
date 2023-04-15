@@ -1,0 +1,35 @@
+name: ifdispatachcaller123
+
+on:
+  push:
+    branches: none # [ main ]
+  pull_request:
+    branches: none # [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  call-workflow-A:
+    uses: clouddrove/test-github-action/.github/workflows/dispatch_called.yml@master
+    with:
+      user: Vishwajit
+      images: vishwajitnagulkar/test1
+      aws-region: ca-central-1
+      ECR_REPOSITORY: vishwajitnagulkar
+      severity: 'HIGH,CRITICAL'             ###which vulnabrity should disable the workflow (local image scan)
+      registry1: 'ECR'
+    secrets:
+      aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      username: ${{ secrets.USERNAME }}
+      password: ${{ secrets.PASSWORD }}
+
+
+
+  # call-workflow-B:
+  #   uses: HoussemDellai/github-actions-course/.github/workflows/080-reusable-workflow-called.yml@main
+  #   with:
+  #     username: Dellai
+  #   secrets:
+  #     token: ${{ secrets.TOKEN }}
