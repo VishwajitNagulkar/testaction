@@ -99,7 +99,7 @@ jobs:
       #     password: ${{ secrets.password }}
       
       - name: Docker Push to Docker Hub
-#         if: ${{ inputs.registry1 == 'DOCKERHUB' }}
+        if: ${{ inputs.registry1 == 'DOCKERHUB' }}
         uses: docker/build-push-action@v4
         with:
           push: true
@@ -121,7 +121,7 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
 
       - name: Push docker image to Amazon ECR
-#         if: ${{ inputs.registry1 == 'ECR' }}
+        if: ${{ inputs.registry1 == 'ECR' }}
         id: docker-build
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
