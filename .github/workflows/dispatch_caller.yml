@@ -1,4 +1,4 @@
-name: ifdispatachcaller123
+name: ifdispatchcaller
 
 on:
   push:
@@ -11,7 +11,7 @@ on:
 
 jobs:
   call-workflow-A:
-    uses: clouddrove/test-github-action/.github/workflows/dispatch_called.yml@master
+    uses: clouddrove/test-github-action/.github/workflows/workflow_called.yml@master
     with:
       user: Vishwajit
       images: vishwajitnagulkar/test1
