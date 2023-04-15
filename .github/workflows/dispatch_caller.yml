@@ -23,14 +23,6 @@ jobs:
     secrets:
       aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
       aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      username: ${{ secrets.USERNAME }}
-      password: ${{ secrets.PASSWORD }}
+      dockerhub-username: ${{ secrets.USERNAME }}
+      dockerhub-password: ${{ secrets.PASSWORD }}
 
-
-
-  # call-workflow-B:
-  #   uses: HoussemDellai/github-actions-course/.github/workflows/080-reusable-workflow-called.yml@main
-  #   with:
-  #     username: Dellai
-  #   secrets:
-  #     token: ${{ secrets.TOKEN }}
