@@ -142,7 +142,7 @@ jobs:
 #           cache-from: type=gha
 #           cache-to: type=gha,mode=max
 #           platforms: linux/amd64,linux/arm64,linux/arm/v7
-      - name: Push docker image to Amazon ECR
+      - name: Push docker image to Amazon ECR and DOCKERHUB
         if: ${{ inputs.registry1 == 'DOCKERHUB,ECR' }}
 #         id: docker-build
         env:
