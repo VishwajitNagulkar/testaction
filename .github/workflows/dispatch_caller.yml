@@ -11,7 +11,7 @@ on:
 
 jobs:
   call-workflow-A:
-    uses: clouddrove/test-github-action/.github/workflows/workflow_called.yml@master
+    uses: VishwajitNagulkar/testaction/.github/workflows/workflow_called.yml@master
     with:
       user: Vishwajit
       images: vishwajitnagulkar/test1
