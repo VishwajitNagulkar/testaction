@@ -63,7 +63,7 @@ jobs:
         with:
           push: false
           load: true # Export to Docker Engine rather than pushing to a registry
-          tags: ${{ github.run_id }}
+          tags: ${{ github.run_number }}
           platforms: linux/amd64
 
       - name: Docker Scan with trivy (non-blocking)
