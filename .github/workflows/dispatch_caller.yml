@@ -1,4 +1,4 @@
-name: ifdispatchcaller
+name: workflow_dispatch
 
 on:
   push:
