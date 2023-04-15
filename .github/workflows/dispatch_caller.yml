@@ -18,7 +18,7 @@ jobs:
       aws-region: ca-central-1
       ECR_REPOSITORY: vishwajitnagulkar
       severity: 'HIGH,CRITICAL'             ###which vulnabrity should disable the workflow (local image scan)
-      registry1: 'ECR && DOCKERHUB'
+      registry1: 'ECR,DOCKERHUB'
     secrets:
       aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
       aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
