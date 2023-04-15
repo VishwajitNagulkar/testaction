@@ -1,4 +1,4 @@
-name: ifcalled123
+name: workflow_call
 
 on:
   workflow_call:
