@@ -61,17 +61,21 @@ jobs:
       - name: Build and export to Docker
         id: build-id
         uses: docker/build-push-action@v4
+        env:
+          tags: ${{ github.run_number }}
         with:
           push: false
           load: true # Export to Docker Engine rather than pushing to a registry
-          tags: ${{ github.run_number }}
+          tags: $tags
           platforms: linux/amd64
 
       - name: Docker Scan with trivy (non-blocking)
         uses: aquasecurity/trivy-action@master
+        env:
+          tags: ${{ github.run_number }}
         with:
 #          image-ref: ${{ github.run_number }}
-         image-ref: ${{ steps.build-id.outputs.tags }}
+         image-ref: $tags
          format: table 
          exit-code: 0
 
