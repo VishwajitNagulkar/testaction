@@ -18,7 +18,7 @@ on:
       severity:
         required: true
         type: string
-      registry1:
+      registry:
         required: true
         type: string
       IMAGE_TAG:
@@ -89,7 +89,7 @@ jobs:
          severity: ${{ inputs.severity}}
        
       - name: Push docker image to DOCKERHUB
-        if: ${{ inputs.registry1 == 'DOCKERHUB' }}
+        if: ${{ inputs.registry == 'DOCKERHUB' }}
         env:
 #           IMAGE_TAG: ${{ github.run_number }}
           IMAGE_TAG: ${{ inputs.IMAGE_TAG }}
@@ -110,7 +110,7 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
 
       - name: Push docker image to Amazon ECR
-        if: ${{ inputs.registry1 == 'ECR' }}
+        if: ${{ inputs.registry == 'ECR' }}
         id: docker-build
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
@@ -122,7 +122,7 @@ jobs:
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
       - name: Push docker image to Amazon ECR and DOCKERHUB
-        if: ${{ inputs.registry1 == 'DOCKERHUB,ECR' }}
+        if: ${{ inputs.registry == 'DOCKERHUB,ECR' }}
         env:
           ## For ECR env variable
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
