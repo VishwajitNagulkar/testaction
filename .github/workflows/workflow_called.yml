@@ -85,10 +85,10 @@ jobs:
 #         run: |
 #           wget https://github.com/github/codeql-action/releases/latest/download/codeql-bundle-linux64.tar.gz.
 #           tar -xvzf ./codeql-bundle-linux64.tar.gz
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v2
-        with:
-          debug: true
+#       - name: Initialize CodeQL
+#         uses: github/codeql-action/init@v2
+#         with:
+#           debug: true
 
       - name: Docker Scan with trivy (non-blocking)
         uses: aquasecurity/trivy-action@master
