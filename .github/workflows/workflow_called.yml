@@ -106,7 +106,8 @@ jobs:
       - name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2
         with:
-          sarif_file: 'trivy-results.sarif'
+#           sarif_file: 'trivy-results.sarif'
+            sarif_file: 'trivy-results.json'
 
       - name: Docker Scan with trivy (blocking)
         uses: aquasecurity/trivy-action@master
