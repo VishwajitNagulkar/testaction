@@ -71,15 +71,15 @@ jobs:
           tags: ${{ github.run_number }}
           platforms: linux/amd64
       
-      - name: install the codeql
-        if: ${{ inputs.registry == 'DOCKERHUB' }}
-#         env:
-# #           IMAGE_TAG: ${{ github.run_number }}
-#           IMAGE_TAG: ${{ inputs.IMAGE_TAG }}
-#           images: ${{ inputs.images }}  
-        run: |
-          wget https://github.com/github/codeql-action/releases/latest/download/codeql-bundle-linux64.tar.gz.
-          tar -xvzf ./codeql-bundle-linux64.tar.gz
+#       - name: install the codeql
+#         if: ${{ inputs.registry == 'DOCKERHUB' }}
+# #         env:
+# # #           IMAGE_TAG: ${{ github.run_number }}
+# #           IMAGE_TAG: ${{ inputs.IMAGE_TAG }}
+# #           images: ${{ inputs.images }}  
+#         run: |
+#           wget https://github.com/github/codeql-action/releases/latest/download/codeql-bundle-linux64.tar.gz.
+#           tar -xvzf ./codeql-bundle-linux64.tar.gz
 
       - name: Docker Scan with trivy (non-blocking)
         uses: aquasecurity/trivy-action@master
