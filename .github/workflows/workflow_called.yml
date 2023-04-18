@@ -1,9 +1,4 @@
-name: workflow_call
-# permissions:
-#   actions: read
-#   contents: read
-#   security-events: write
-#   statuses: write
+name: workflow_call_A
 
 on:
   workflow_call:
@@ -18,9 +13,6 @@ on:
         required: true
         type: string
       ECR_REPOSITORY:
-        required: true
-        type: string
-      severity:
         required: true
         type: string
       registry:

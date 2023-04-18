@@ -18,10 +18,6 @@ jobs:
   call-workflow-A:
     uses: VishwajitNagulkar/testaction/.github/workflows/trivy_called.yml@master
     with:
-      # user: Vishwajit
-      # images: vishwajitnagulkar/test1
-      # aws-region: ca-central-1
-      # ECR_REPOSITORY: vishwajitnagulkar
       severity: 'HIGH,CRITICAL'             
 
   call-workflow-B:
@@ -42,6 +38,4 @@ jobs:
       dockerhub-username: ${{ secrets.USERNAME }}
       dockerhub-password: ${{ secrets.PASSWORD }}
 
-  # call-workflow-B:
-  #   uses: VishwajitNagulkar/testaction/.github/workflows/trivy_called.yml@master
 
