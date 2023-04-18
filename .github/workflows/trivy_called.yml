@@ -7,7 +7,7 @@ name: workflow_callB
 
 on:
   workflow_call:
-    # inputs:
+    inputs:
     #   user:
     #     required: true
     #     type: string
@@ -20,9 +20,9 @@ on:
     #   ECR_REPOSITORY:
     #     required: true
     #     type: string
-    #   severity:
-    #     required: true
-    #     type: string
+      severity:
+        required: true
+        type: string
     #   registry:
     #     required: true
     #     type: string
