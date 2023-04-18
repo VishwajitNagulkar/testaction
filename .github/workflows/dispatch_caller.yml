@@ -16,6 +16,9 @@ on:
 
 jobs:
   call-workflow-A:
+  uses: VishwajitNagulkar/testaction/.github/workflows/trivy_called.yml@master
+  
+  call-workflow-B:
     uses: VishwajitNagulkar/testaction/.github/workflows/workflow_called.yml@master
     with:
       user: Vishwajit
