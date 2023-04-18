@@ -19,6 +19,8 @@ jobs:
     uses: VishwajitNagulkar/testaction/.github/workflows/trivy_called.yml@master
 
   call-workflow-B:
+    needs: call-workflow-A
+    if: ${{ success() && needs.call-workflow-A.result == 'success' }}
     uses: VishwajitNagulkar/testaction/.github/workflows/workflow_called.yml@master
     with:
       user: Vishwajit
