@@ -17,6 +17,12 @@ on:
 jobs:
   call-workflow-A:
     uses: VishwajitNagulkar/testaction/.github/workflows/trivy_called.yml@master
+    with:
+      # user: Vishwajit
+      # images: vishwajitnagulkar/test1
+      # aws-region: ca-central-1
+      # ECR_REPOSITORY: vishwajitnagulkar
+      severity: 'HIGH,CRITICAL'             
 
   call-workflow-B:
     needs: call-workflow-A
