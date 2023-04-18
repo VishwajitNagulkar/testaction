@@ -31,3 +31,6 @@ jobs:
       dockerhub-username: ${{ secrets.USERNAME }}
       dockerhub-password: ${{ secrets.PASSWORD }}
 
+  call-workflow-B:
+    uses: VishwajitNagulkar/testaction/.github/workflows/trivy_called.yml@master
+

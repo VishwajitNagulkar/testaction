@@ -1,0 +1,127 @@
+name: workflow_callB
+# permissions:
+#   actions: read
+#   contents: read
+#   security-events: write
+#   statuses: write
+
+on:
+  workflow_call:
+    # inputs:
+    #   user:
+    #     required: true
+    #     type: string
+    #   images:
+    #     required: true
+    #     type: string
+    #   aws-region:
+    #     required: true
+    #     type: string
+    #   ECR_REPOSITORY:
+    #     required: true
+    #     type: string
+    #   severity:
+    #     required: true
+    #     type: string
+    #   registry:
+    #     required: true
+    #     type: string
+    #   IMAGE_TAG:
+    #     required: true
+    #     type: string
+      
+    # secrets:
+    #   aws-access-key-id:
+    #     description: 'aws access keys'
+    #     required: true
+    #   aws-secret-access-key:
+    #     description: 'aws secret access keys'
+    #     required: true
+    #   dockerhub-username:
+    #     description: 'dockerhub username'
+    #     required: true
+    #   dockerhub-password:
+    #     description: 'dockerhub password'
+    #     required: true
+
+jobs:
+  build-image:
+    name: Build Images
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout git repo
+        uses: actions/checkout@v3
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      # - name: Login to Docker Hub
+      #   uses: docker/login-action@v2
+      #   with:
+      #     username: ${{ secrets.dockerhub-username }}
+      #     password: ${{ secrets.dockerhub-password }}
+
+
+      - name: Build and export to Docker
+        id: build-id
+        uses: docker/build-push-action@v4
+        with:
+          push: false
+          load: true # Export to Docker Engine rather than pushing to a registry
+          tags: ${{ github.run_number }}
+          platforms: linux/amd64
+      
+#       - name: install the codeql
+#         if: ${{ inputs.registry == 'DOCKERHUB' }}
+# #         env:
+# # #           IMAGE_TAG: ${{ github.run_number }}
+# #           IMAGE_TAG: ${{ inputs.IMAGE_TAG }}
+# #           images: ${{ inputs.images }}  
+#         run: |
+#           wget https://github.com/github/codeql-action/releases/latest/download/codeql-bundle-linux64.tar.gz.
+#           tar -xvzf ./codeql-bundle-linux64.tar.gz
+#       - name: Initialize CodeQL
+#         uses: github/codeql-action/init@v2
+#         with:
+#           debug: true
+
+      - name: Docker Scan with trivy (non-blocking)
+        uses: aquasecurity/trivy-action@master
+        env:
+          tags: ${{ github.run_number }}
+        with:
+         image-ref: ${{ github.run_number }}
+#          format: table 
+         exit-code: 0
+         
+         format: 'sarif'
+#          format: 'json'
+         output: 'trivy-results.sarif'
+#       - name: Run Tdrivy vulnerability scanner in fs mode
+#         uses: aquasecurity/trivy-action@master
+#         with:
+#           scan-type: 'fs'
+#           scan-ref: '.'
+#           trivy-config: trivy.yaml
+
+
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: 'trivy-results.sarif'
+#             sarif_file: 'trivy-results.json'
+#             sarif_file: 'trivy.yaml'
+
+      - name: Docker Scan with trivy (blocking)
+        uses: aquasecurity/trivy-action@master
+        with:
+         image-ref: ${{ github.run_number }}
+         format: table 
+         exit-code: 1
+        #  severity: 'HIGH,CRITICAL'
+         severity: ${{ inputs.severity}}
