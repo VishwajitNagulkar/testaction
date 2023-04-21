@@ -1,4 +1,4 @@
-name: workflow_dispatch
+name: workflow_dispatch_cd
 permissions:
   actions: read
   contents: read
