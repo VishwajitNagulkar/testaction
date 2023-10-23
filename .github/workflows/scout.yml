@@ -58,19 +58,30 @@ jobs:
             type=edge,branch=$repo.default_branch
             type=semver,pattern=v{{version}}
             type=sha,prefix=,suffix=,format=short
+
+
+      - name: Push docker image to DOCKERHUB
+        env:
+          IMAGE_TAG: scout
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+        run: |
+          docker build -t $images:$IMAGE_TAG .
+          docker push $images:$IMAGE_TAG
       
-      # Build and push Docker image with Buildx (don't push on PR)
-      # https://github.com/docker/build-push-action
-      - name: Build and push Docker image
-        id: build-and-push
-        uses: docker/build-push-action@v4.0.0
-        with:
-          context: .
-          push: false
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+    #   # Build and push Docker image with Buildx (don't push on PR)
+    # #  https://github.com/docker/build-push-action
+    #   - name: Build and push Docker image
+    #     id: build-and-push
+    #     uses: docker/build-push-action@v4.0.0
+    #     with:
+    #       context: .
+    #       push: false
+    #       tags: ${{ steps.meta.outputs.tags }}
+    #       labels: ${{ steps.meta.outputs.labels }}
+    #       cache-from: type=gha
+    #       cache-to: type=gha,mode=max
+
+      
       
       # - name: Docker Scout
       #   id: docker-scout
@@ -110,7 +121,7 @@ jobs:
           command: cves,recommendations,compare
           to-latest: false
           to: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.COMPARE_TAG }}
-          image: ${{ steps.meta.outputs.tags }}
+          image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:scout
           ignore-base: false
           ignore-unchanged: true
           only-fixed: false
