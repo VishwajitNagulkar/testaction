@@ -1,0 +1,26 @@
+name: Docker-caller Workflow
+# This permission are helpful for pushing vulnerability in security tab
+permissions:
+  contents: read
+  packages: write
+  pull-requests: write
+
+on:
+  # push:
+  #   branches:
+  #     - 'scout-caller.yml'
+  pull_request:
+    branches: [ scout-called ]
+
+jobs:
+
+  call-workflow-B:
+    uses: clouddrove/github-shared-workflows/.github/workflows/docker-scout.yml@internal_357
+    with:
+      images: vishwajitnagulkar/test1
+      # IMAGE_TAG: scout10
+      COMPARE_TAG: 3
+    secrets:
+      DOCKERHUB_USERNAME: ${{ secrets.USERNAME }}
+      DOCKERHUB_PASSWORD: ${{ secrets.PASSWORD }}
+      TOKEN: ${{ secrets.TOKEN }}
