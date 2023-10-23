@@ -59,7 +59,7 @@ jobs:
         with:
           command: cves,recommendations,compare
           to-latest: false
-          to: ${{ inputs.images }}:${{ COMPARE_TAG }}
+          to: ${{ inputs.images }}:${{ inputs.COMPARE_TAG }}
           image: ${{ inputs.images }}:${{ inputs.IMAGE_TAG }}
           ignore-base: false
           ignore-unchanged: true
