@@ -109,7 +109,10 @@ jobs:
         with:
           command: cves,recommendations,compare
           image: ${{ steps.meta.outputs.tags }}
-          to-latest: true
-          ignore-base: true
+          to: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.COMPARE_TAG }}
+          only-severities: critical,high
+          # to-latest: true
+          # ignore-base: true
           ignore-unchanged: true
-          only-fixed: true
+          # only-fixed: true
+          github-token: ${{ secrets.TOKEN }}
