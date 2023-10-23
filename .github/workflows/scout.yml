@@ -40,12 +40,20 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
       
+      # - name: Push docker image to DOCKERHUB
+      #   env:
+      #     IMAGE_TAG: scout7
+      #     images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+      #   run: |
+      #     docker build -t $images:IMAGE_TAG .
+      #     docker push $images:$IMAGE_TAG
+
       - name: Push docker image to DOCKERHUB
         env:
-          IMAGE_TAG: scout7
+          IMAGE_TAG: scout8
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
         run: |
-          docker build -t $images:IMAGE_TAG .
+          docker build -t $images:$IMAGE_TAG .
           docker push $images:$IMAGE_TAG
       
       - name: Docker Scout
@@ -55,7 +63,7 @@ jobs:
           command: cves,recommendations,compare
           to-latest: false
           to: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.COMPARE_TAG }}
-          image: ${{ env.IMAGE_NAME }}:scout7
+          image: ${{ env.IMAGE_NAME }}:scout8
           ignore-base: false
           ignore-unchanged: true
           only-fixed: false
