@@ -108,11 +108,11 @@ jobs:
         uses: docker/scout-action@v1
         with:
           command: cves,recommendations,compare
-          image: ${{ steps.meta.outputs.tags }}
+          to-latest: false
           to: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.COMPARE_TAG }}
-          only-severities: critical,high
-          # to-latest: true
-          # ignore-base: true
+          image: ${{ steps.meta.outputs.tags }}
+          ignore-base: false
           ignore-unchanged: true
-          # only-fixed: true
+          only-fixed: false
+          write-comment: true
           github-token: ${{ secrets.TOKEN }}
