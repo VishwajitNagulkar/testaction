@@ -20,6 +20,9 @@ on:
       DOCKERHUB_PASSWORD:
         description: 'dockerhub password'
         required: true
+      TOKEN:
+        description: 'dockerhub password'
+        required: true
 
 jobs:
   build-image:
