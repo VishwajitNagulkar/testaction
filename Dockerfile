@@ -1,7 +1,4 @@
-#This is a sample Image 
-FROM ubuntu 
+FROM ubuntu:20.04
 MAINTAINER nagulkarvishwajit1999@gmail.com
-
-RUN sudo apt update
-RUN sudo apt install nginx -y
+RUN apt update && apt install -y nginx
 CMD [“echo”,”Image created”] 
