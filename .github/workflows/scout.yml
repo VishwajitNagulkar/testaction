@@ -77,7 +77,7 @@ jobs:
           IMAGE_TAG: scout
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
         run: |
-          docker build -t $images:scout2 .
+          docker build -t $images:scout3 .
           # docker push $images:$IMAGE_TAG
       
       # - name: Docker Scout
@@ -118,7 +118,7 @@ jobs:
           command: cves,recommendations,compare
           to-latest: false
           to: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.COMPARE_TAG }}
-          image: ${{ env.IMAGE_NAME }}:scout1
+          image: ${{ env.IMAGE_NAME }}:scout3
           ignore-base: false
           ignore-unchanged: true
           only-fixed: false
