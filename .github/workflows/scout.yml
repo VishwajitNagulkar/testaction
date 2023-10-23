@@ -85,19 +85,34 @@ jobs:
       #     write-comment: true
       #     github-token: ${{ secrets.TOKEN }} # to be able to write the comment
 
-      - name: Analyze for critical and high CVEs
-        id: docker-scout-cves
-        if: ${{ github.event_name == 'pull_request' }}
+      # - name: Analyze for critical and high CVEs
+      #   id: docker-scout-cves
+      #   if: ${{ github.event_name == 'pull_request' }}
+      #   uses: docker/scout-action@v1
+      #   with:
+      #     command: cves
+      #     image: ${{ steps.meta.outputs.tags }}
+      #     sarif-file: sarif.output.json
+      #     summary: true
+      
+      # - name: Upload SARIF result
+      #   id: upload-sarif
+      #   if: ${{ github.event_name == 'pull_request' }}
+      #   uses: github/codeql-action/upload-sarif@v2
+      #   with:
+      #     sarif_file: sarif.output.json
+
+
+      - name: Docker Scout
+        id: docker-scout
         uses: docker/scout-action@v1
         with:
-          command: cves
+          command: cves,recommendations,compare
           image: ${{ steps.meta.outputs.tags }}
-          sarif-file: sarif.output.json
-          summary: true
-      
-      - name: Upload SARIF result
-        id: upload-sarif
-        if: ${{ github.event_name == 'pull_request' }}
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: sarif.output.json
+          to: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.COMPARE_TAG }}
+          only-severities: critical,high
+          # to-latest: true
+          # ignore-base: true
+          ignore-unchanged: true
+          # only-fixed: true
+          github-token: ${{ secrets.TOKEN }}
