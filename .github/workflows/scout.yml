@@ -78,7 +78,7 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
         run: |
           docker build -t $images:$IMAGE_TAG .
-          docker push $images:$IMAGE_TAG
+          # docker push $images:$IMAGE_TAG
       
       # - name: Docker Scout
       #   id: docker-scout
