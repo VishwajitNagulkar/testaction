@@ -94,6 +94,20 @@ jobs:
           image: ${{ steps.meta.outputs.tags }}
           sarif-file: sarif.output.json
           summary: true
+
+      - name: Docker Scout
+        id: docker-scout
+        uses: docker/scout-action@v1
+        with:
+          command: cves,recommendations,compare
+          to-latest: false
+          to: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.COMPARE_TAG }}
+          image: ${{ steps.meta.outputs.tags }}
+          ignore-base: false
+          ignore-unchanged: true
+          only-fixed: false
+          write-comment: true
+          github-token: ${{ secrets.TOKEN }}
       
       - name: Upload SARIF result
         id: upload-sarif
@@ -101,3 +115,6 @@ jobs:
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: sarif.output.json
+
+
+          
