@@ -6,9 +6,9 @@ permissions:
   pull-requests: write
 
 on:
-  push:
-    branches:
-      - 'scout-caller.yml'
+  # push:
+  #   branches:
+  #     - 'scout-caller.yml'
   pull_request:
     branches: [ scout-called ]
 
@@ -18,7 +18,7 @@ jobs:
     uses: clouddrove/github-shared-workflows/.github/workflows/docker-scout.yml@internal_357
     with:
       images: vishwajitnagulkar/test1
-      IMAGE_TAG: scout10
+      # IMAGE_TAG: scout10
       COMPARE_TAG: 3
     secrets:
       DOCKERHUB_USERNAME: ${{ secrets.USERNAME }}
