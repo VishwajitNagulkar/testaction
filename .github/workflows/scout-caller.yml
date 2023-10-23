@@ -15,7 +15,7 @@ on:
 jobs:
 
   call-workflow-B:
-    uses: VishwajitNagulkar/testaction/.github/workflows/scout-called.yml@scout-called
+    uses: VishwajitNagulkar/testaction/.github/workflows/scout-called.yml@internal_357
     with:
       images: vishwajitnagulkar/test1
       IMAGE_TAG: scout10
