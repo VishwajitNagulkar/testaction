@@ -50,11 +50,11 @@ jobs:
 
       - name: Push docker image to DOCKERHUB
         env:
-          IMAGE_TAG: scout8
+          IMAGE_TAG: scout9
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
         run: |
           docker build -t $images:$IMAGE_TAG .
-          docker push $images:$IMAGE_TAG
+          # docker push $images:$IMAGE_TAG
       
       - name: Docker Scout
         id: docker-scout
@@ -63,7 +63,7 @@ jobs:
           command: cves,recommendations,compare
           to-latest: false
           to: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.COMPARE_TAG }}
-          image: ${{ env.IMAGE_NAME }}:scout8
+          image: ${{ env.IMAGE_NAME }}:scout9
           ignore-base: false
           ignore-unchanged: true
           only-fixed: false
