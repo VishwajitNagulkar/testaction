@@ -1,3 +1,7 @@
-FROM ubuntu:20.04
-RUN apt update && apt install -y sbcl
-WORKDIR /usr/src
+#This is a sample Image 
+FROM ubuntu 
+MAINTAINER nagulkarvishwajit1999@gmail.com
+
+RUN apt-get update 
+RUN apt-get install –y nginx 
+CMD [“echo”,”Image created”] 
