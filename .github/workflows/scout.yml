@@ -1,12 +1,12 @@
 name: Docker
 
 on:
-  push:
-    branches:
-      - 'master2'
-  pull_request:
-    branches: [ master2 ]
-    
+  # push:
+  #   branches:
+  #     - 'master2'
+  # pull_request:
+  #   branches: [ master2 ]
+  workflow_dispatch:
 env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: docker.io
