@@ -6,9 +6,9 @@ permissions:
   pull-requests: write
 
 on:
-  # push:
-  #   branches:
-  #     - 'master2'
+  push:
+    branches:
+      - 'scout-caller.yml'
   pull_request:
     branches: [ scout-called ]
 
