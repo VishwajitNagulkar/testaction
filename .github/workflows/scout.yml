@@ -72,7 +72,7 @@ jobs:
     #       cache-from: type=gha
     #       cache-to: type=gha,mode=max
 
-       - name: Push docker image to DOCKERHUB
+      - name: Push docker image to DOCKERHUB
         env:
           IMAGE_TAG: scout
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
