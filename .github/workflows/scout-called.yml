@@ -4,9 +4,6 @@ name: docker-scout
 on:
   workflow_call:
     inputs:
-      registry:
-        required: true
-        type: string
       images:
         required: true
         type: string
